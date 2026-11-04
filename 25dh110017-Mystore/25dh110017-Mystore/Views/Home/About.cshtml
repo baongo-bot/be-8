@@ -1,0 +1,144 @@
+﻿@{
+    ViewBag.Title = "Giới Thiệu - BookStore";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .khung-gioi-thieu {
+        max-width: 1100px;
+        margin: 30px auto;
+        padding: 0 20px;
+    }
+
+    .tieu-de-trang-gt {
+        font-size: 28px;
+        font-weight: bold;
+        color: #cc0000;
+        text-align: center;
+        margin-bottom: 8px;
+    }
+
+    .mo-ta-phu-gt {
+        text-align: center;
+        color: #666;
+        margin-bottom: 30px;
+        font-size: 15px;
+    }
+
+    #BangSoLieu {
+        display: flex;
+        justify-content: space-around;
+        background: #fff;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .con-so-lon {
+        display: block;
+        font-size: 32px;
+        font-weight: bold;
+        color: #cc0000;
+    }
+
+    .chu-nho-so-lieu {
+        color: #666;
+        font-size: 13px;
+    }
+
+    .khoi-noi-dung-gt {
+        background: #fff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        margin-bottom: 25px;
+    }
+
+        .khoi-noi-dung-gt h3 {
+            color: #333;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+    .luoi-dac-diem-gt {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
+    }
+
+    .the-dac-diem-gt {
+        background: #f9f9f9;
+        padding: 20px;
+        border-radius: 8px;
+        border-left: 4px solid #cc0000;
+    }
+
+        .the-dac-diem-gt h4 {
+            margin: 0 0 8px 0;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .the-dac-diem-gt p {
+            margin: 0;
+            color: #666;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+</style>
+
+<div class="khung-gioi-thieu">
+    <h1 class="tieu-de-trang-gt">Về BookStore</h1>
+    <p class="mo-ta-phu-gt">Hệ thống nhà sách hàng đầu — Tri thức không giới hạn</p>
+
+    <!-- Số liệu nổi bật -->
+    <div id="BangSoLieu">
+        <div class="o-so-lieu">
+            <span class="con-so-lon">10+</span>
+            <span class="chu-nho-so-lieu">Năm kinh nghiệm</span>
+        </div>
+        <div class="o-so-lieu">
+            <span class="con-so-lon">50+</span>
+            <span class="chu-nho-so-lieu">Chi nhánh toàn quốc</span>
+        </div>
+        <div class="o-so-lieu">
+            <span class="con-so-lon">100.000+</span>
+            <span class="chu-nho-so-lieu">Đầu sách phong phú</span>
+        </div>
+        <div class="o-so-lieu">
+            <span class="con-so-lon">1 Triệu+</span>
+            <span class="chu-nho-so-lieu">Khách hàng tin dùng</span>
+        </div>
+    </div>
+
+    <!-- Câu chuyện -->
+    <div class="khoi-noi-dung-gt">
+        <h3><i class="bi bi-book-half"></i> Câu Chuyện Của Chúng Tôi</h3>
+        <p>
+            Được thành lập với sứ mệnh lan tỏa văn hóa đọc, <strong>BookStore</strong> là hệ thống nhà sách trực tuyến hiện đại, thân thiện và phong phú hàng đầu.
+            Với tôn chỉ <em>"Lan tỏa tri thức — Kết nối cộng đồng"</em>, chúng tôi không ngừng nỗ lực mang sách đến tay mọi tầng lớp độc giả.
+        </p>
+    </div>
+
+    <!-- Đặc điểm nổi bật -->
+    <div class="khoi-noi-dung-gt">
+        <h3><i class="bi bi-star-fill"></i> Tại Sao Chọn Chúng Tôi?</h3>
+        <div class="luoi-dac-diem-gt">
+            <div class="the-dac-diem-gt">
+                <h4>100% Sách Chính Hãng</h4>
+                <p>Cam kết sách thật, nguồn gốc xuất xứ rõ ràng từ các nhà xuất bản uy tín.</p>
+            </div>
+            <div class="the-dac-diem-gt">
+                <h4>Giao Hàng Toàn Quốc</h4>
+                <p>Đặt online giao tận nhà nhanh chóng, hỗ trợ đổi trả dễ dàng trong 30 ngày.</p>
+            </div>
+            <div class="the-dac-diem-gt">
+                <h4>Giá Cả Ưu Đãi</h4>
+                <p>Thường xuyên có chương trình giảm giá, combo ưu đãi và tích điểm thành viên.</p>
+            </div>
+        </div>
+    </div>
+</div>

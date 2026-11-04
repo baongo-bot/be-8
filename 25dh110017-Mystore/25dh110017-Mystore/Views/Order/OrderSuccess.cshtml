@@ -1,0 +1,56 @@
+﻿@model _25dh110017_Mystore.Models.Order
+
+@{
+    ViewBag.Title = "Đặt hàng thành công - ARIS SHOP";
+}
+
+<div class="container my-5" style="max-width: 800px;">
+    <div class="card bg-dark text-light p-5 shadow-lg text-center" style="border: 2px solid #00f2fe; border-radius: 16px; background-color: #0b0f19 !important; box-shadow: 0 0 30px rgba(0, 242, 254, 0.25);">
+
+        <!-- BIỂU TƯỢNG THÀNH CÔNG PHÁT SÁNG -->
+        <div class="mb-3">
+            <span class="p-3 d-inline-block rounded-circle" style="background: rgba(16, 185, 129, 0.15); border: 1px solid #10b981; font-size: 40px; text-shadow: 0 0 15px #10b981;">
+                🎉
+            </span>
+        </div>
+
+        <h2 class="text-success font-weight-bold mb-2" style="text-shadow: 0 0 10px rgba(16, 185, 129, 0.5);">
+            ĐẶT HÀNG THÀNH CÔNG!
+        </h2>
+        <p class="text-muted mb-4">Cảm ơn bạn đã tin tưởng và mua sắm tại hệ thống <strong class="text-info">ARIS SHOP</strong>.</p>
+
+        <!-- KHUNG THÔNG TIN ĐƠN HÀNG -->
+        <div class="p-4 rounded mb-4 text-start" style="background-color: #111827; border: 1px solid rgba(0, 242, 254, 0.3);">
+            <div class="row mb-2">
+                <div class="col-sm-6 text-muted">Mã đơn hàng:</div>
+                <div class="col-sm-6 text-light font-weight-bold">#@Model.OrderID</div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-sm-6 text-muted">Ngày đặt:</div>
+                <div class="col-sm-6 text-light">@Model.OrderDate</div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-sm-6 text-muted">Trạng thái hệ thống:</div>
+                <div class="col-sm-6"><span class="badge bg-warning text-dark px-2 py-1">Đang xử lý (Pending)</span></div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 text-muted">Tổng giá trị thanh toán:</div>
+                <div class="col-sm-6 text-danger font-weight-bold" style="font-size: 18px; text-shadow: 0 0 8px rgba(244, 63, 94, 0.4);">
+                    @string.Format("{0:N0} VNĐ", Model.TotalAmount)
+                </div>
+            </div>
+        </div>
+
+        <!-- HƯỚNG DẪN TIẾP THEO -->
+        <div class="text-muted small mb-4" style="line-height: 1.6;">
+            <p class="mb-0">📌 Đơn hàng của bạn đã được ghi nhận vào hệ thống cơ sở dữ liệu và đang được chuẩn bị để bàn giao cho đơn vị vận chuyển (Dự kiến giao hàng trong 2-4 ngày tới).</p>
+        </div>
+
+        <!-- NÚT ĐIỀU HƯỚNG -->
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <a href="@Url.Action("Index", "Home")" class="btn btn-info px-4 py-2 font-weight-bold shadow-sm" style="background: linear-gradient(135deg, #00f2fe 0%, #3b82f6 100%); border: none; color: #05070e;">
+                ⚡ Tiếp tục mua sắm
+            </a>
+        </div>
+    </div>
+</div>

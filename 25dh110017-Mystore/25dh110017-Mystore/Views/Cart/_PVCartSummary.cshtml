@@ -1,0 +1,8 @@
+﻿@model _25dh110017_Mystore.Models.Cart.Cart
+
+<a href="@Url.Action("Index", "Cart")" class="btn btn-default navbar-btn">
+    <i class="glyphicon glyphicon-shopping-cart"></i> Giỏ hàng
+    <span class="badge pull-right" style="margin-left:5px; background-color:#d9534f;">
+        @(Model != null ? Model.TotalQuantity() : 0)
+    </span>
+</a>

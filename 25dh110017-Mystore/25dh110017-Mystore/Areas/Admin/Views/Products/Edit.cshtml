@@ -1,0 +1,29 @@
+﻿@model _25dh110017_Mystore.Models.Product
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 class="bg-success" style="padding: 10px;">CẬP NHẬT SẢN PHẨM</h2>
+
+@using (Html.BeginForm("Edit", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ProductID)
+        @Html.HiddenFor(model => model.ProductImage)
+
+        @Html.Partial("PVCreateEditProduct", Model)
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10" style="margin-top: 15px;">
+                <input type="submit" value="Lưu" class="btn btn-primary" />
+                @Html.ActionLink("Quay lại danh sách", "Index", null, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+}

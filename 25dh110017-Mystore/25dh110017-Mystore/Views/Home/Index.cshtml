@@ -1,0 +1,66 @@
+﻿@model _25dh110017_Mystore.Models.ViewModel.HomeProductVM
+
+@{
+    ViewBag.Title = "Trang chủ - ARIS SHOP";
+}
+
+<!-- THANH DANH MỤC PHÂN LOẠI SẢN PHẨM -->
+<div class="container mb-4">
+    <div class="d-flex align-items-center justify-content-center flex-wrap gap-2 py-3 px-3 rounded" style="background-color: #111827; border: 1px solid rgba(0, 242, 254, 0.2);">
+        <span class="text-info fw-bold me-2">📂 Danh mục:</span>
+        <a href="@Url.Action("Index", "Home")" class="btn btn-sm btn-outline-info active">Tất cả</a>
+        <a href="@Url.Action("Index", "Home", new { categoryId = 1 })" class="btn btn-sm btn-outline-secondary text-light">Kinh Tế - Kỹ Năng</a>
+        <a href="@Url.Action("Index", "Home", new { categoryId = 2 })" class="btn btn-sm btn-outline-secondary text-light">Văn Học - Tiểu Thuyết</a>
+        <a href="@Url.Action("Index", "Home", new { categoryId = 3 })" class="btn btn-sm btn-outline-secondary text-light">Tâm Lý Học</a>
+        <a href="@Url.Action("Index", "Home", new { categoryId = 4 })" class="btn btn-sm btn-outline-secondary text-light">Lịch Sử - Xã Hội</a>
+        <a href="@Url.Action("Index", "Home", new { categoryId = 4 })" class="btn btn-sm btn-outline-secondary text-light">Sách Văn Học</a>
+    </div>
+</div>
+
+<!-- PHẦN TÌM KIẾM SẢN PHẨM -->
+<section class="container searchProd mb-4" style="background: linear-gradient(135deg, #111827 0%, #0b0f19 100%); border: 1px solid rgba(0, 242, 254, 0.3); border-radius: 12px; padding: 30px 20px; box-shadow: 0 0 20px rgba(0, 242, 254, 0.15);">
+    <div class="text-center mb-3">
+        <h2 class="text-info font-weight-bold" style="text-shadow: 0 0 10px rgba(0, 242, 254, 0.4);">🔍 Tìm kiếm sản phẩm</h2>
+    </div>
+    @using (Html.BeginForm("Index", "Home", FormMethod.Get, new { @class = "row justify-content-center" }))
+    {
+        <div class="col-md-8 col-lg-6">
+            <div class="input-group">
+                @* BẮT BUỘC PHẢI CÓ DẤU @ Ở ĐÂY *@
+                @Html.TextBoxFor(m => m.SearchTerm, new
+                {
+                    @class = "form-control form-control-lg",
+                    style = "background-color: #070913; color: #fff; border-color: #1e293b;",
+                    placeholder = "Nhập từ khóa tìm kiếm (tên sách, tác giả)..."
+                })
+                <button type="submit" class="btn btn-info px-4 font-weight-bold" style="background: linear-gradient(135deg, #00f2fe 0%, #3b82f6 100%); border: none; color: #05070e;">
+                    Tìm kiếm
+                </button>
+            </div>
+        </div>
+    }
+</section>
+
+<hr class="my-4 border-secondary" />
+
+<div id="product-section" class="container">
+    <!-- NẾU CÓ DỮ LIỆU: HIỂN THỊ 2 PARTIAL VIEWS -->
+    @if ((Model.FeaturedProducts != null && Model.FeaturedProducts.Any()) || (Model.NewProducts != null && Model.NewProducts.Any()))
+    {
+        <!-- PHẦN SẢN PHẨM NỔI BẬT -->
+        @Html.Partial("_PVFeatureProduct", Model)
+
+        <hr class="my-5 border-secondary" />
+
+        <!-- PHẦN SẢN PHẨM MỚI -->
+        @Html.Partial("_PVNewProduct", Model)
+    }
+    else
+    {
+        <!-- NẾU TRỐNG: THÔNG BÁO CHO NGƯỜI DÙNG -->
+        <div class="alert alert-warning text-center my-4 p-4 shadow-sm" role="alert" style="background-color: #111827; border: 1px solid #334155; color: #f8fafc;">
+            <h5 class="mb-1 text-info">Không tìm thấy sản phẩm nào phù hợp!</h5>
+            <p class="mb-0 text-muted">Vui lòng thử lại với từ khóa khác hoặc lựa chọn danh mục sản phẩm khác.</p>
+        </div>
+    }
+</div>

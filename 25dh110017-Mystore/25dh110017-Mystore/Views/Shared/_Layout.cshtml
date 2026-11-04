@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - ARIS SHOP</title>
+    @Styles.Render("~/Content/css")
+    <!-- Nhúng file CSS giao diện Cyberpunk cao cấp -->
+    <link href="~/Content/ARIS-Theme.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark py-2">
+        <div class="container">
+            <!-- LOGO THƯƠNG HIỆU ARIS CÔNG NGHỆ -->
+            <a class="navbar-brand d-flex align-items-center me-4" href="@Url.Action("Index", "Home")">
+                <!-- Thẻ ảnh trỏ thẳng tới thư mục Images -->
+                <img src="@Url.Content("~/Images/logo.png")"
+                     
+                     style="height: 42px; width: auto; object-fit: contain;"
+                     
+                     onerror="this.style.display='none'; document.getElementById('cyber-text-logo').style.display='inline-block';" />
+
+                <!-- Logo chữ Cyberpunk dự phòng (luôn đẹp lung linh nếu file ảnh cục bộ chưa nhận) -->
+                <span id="cyber-text-logo" class="font-weight-bold me-2" style="display: none; font-size: 24px; background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 2px;">⚡ARIS</span>
+
+                <span class="text-info font-weight-bold" style="font-size: 20px; letter-spacing: 1px;">SHOP</span>
+            </a>
+
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">@Html.ActionLink("Trang chủ", "Index", "Home", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Giới thiệu", "About", "Home", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Liên hệ", "Contact", "Home", null, new { @class = "nav-link" })</li>
+
+                    <!-- NÚT QUẢN TRỊ ADMIN -->
+                    <li class="nav-item">
+                        @Html.ActionLink("Quản trị", "Index", "Products", new { area = "Admin" }, new { @class = "nav-link text-warning font-weight-bold" })
+                    </li>
+                </ul>
+
+                <div class="d-flex align-items-center gap-3">
+                    <!-- TÍCH HỢP GIỎ HÀNG NHỎ TRÊN HEADER -->
+                    <div>
+                        @Html.Action("CartSummary", "Cart")
+                    </div>
+
+                    <!-- NÚT XỬ LÝ ĐĂNG KÝ / ĐĂNG NHẬP / ĐĂNG XUẤT -->
+                    <ul class="navbar-nav align-items-center">
+                        @if (Session["Username"] != null)
+                        {
+                            <li class="nav-item me-2">
+                                <span class="text-white">Xin chào, <strong class="text-warning">@Session["Username"]</strong></span>
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Đăng xuất", "Logout", "Account", null, new { @class = "btn btn-outline-danger btn-sm" })
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item me-2">
+                                @Html.ActionLink("Đăng ký", "Register", "Account", null, new { @class = "btn btn-outline-warning btn-sm" })
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Đăng nhập", "Login", "Account", null, new { @class = "btn btn-outline-light btn-sm" })
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container body-content mt-3">
+        @RenderBody()
+        <hr class="mt-5" />
+        <footer>
+            <!-- CHÂN TRANG ARIS SHOP -->
+            <p class="text-muted">&copy; @DateTime.Now.Year - ARIS SHOP E-Commerce Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

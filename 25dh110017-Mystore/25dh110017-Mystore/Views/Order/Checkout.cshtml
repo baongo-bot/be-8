@@ -1,0 +1,88 @@
+﻿@model _25dh110017_Mystore.Models.ViewModel.CheckoutVM
+
+@{
+    ViewBag.Title = "Xác nhận thanh toán - ARIS SHOP";
+}
+
+<div class="container my-5" style="max-width: 950px;">
+    <div class="card bg-dark text-light p-4 shadow-lg" style="border: 1px solid #00f2fe; border-radius: 12px; background-color: #0b0f19 !important;">
+        <h2 class="text-info font-weight-bold mb-4 text-center" style="text-shadow: 0 0 10px rgba(0, 242, 254, 0.5);">
+            ⚡ XÁC NHẬN THÔNG TIN GIAO HÀNG
+        </h2>
+
+        @using (Html.BeginForm("Checkout", "Order", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+
+            <div class="row">
+                <!-- CỘT TRÁI: FORM NHẬP THÔNG TIN -->
+                <div class="col-md-7">
+                    <div class="mb-3">
+                        @Html.LabelFor(m => m.CustomerName, new { @class = "form-label text-light" })
+                        @Html.TextBoxFor(m => m.CustomerName, new { @class = "form-control bg-dark text-light border-secondary", placeholder = "Nhập họ và tên người nhận..." })
+                        @Html.ValidationMessageFor(m => m.CustomerName, "", new { @class = "text-danger small" })
+                    </div>
+
+                    <div class="mb-3">
+                        @Html.LabelFor(m => m.Phone, new { @class = "form-label text-light" })
+                        @Html.TextBoxFor(m => m.Phone, new { @class = "form-control bg-dark text-light border-secondary", placeholder = "Nhập số điện thoại liên hệ..." })
+                        @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "text-danger small" })
+                    </div>
+
+                    <div class="mb-3">
+                        @Html.LabelFor(m => m.DeliveryAddress, new { @class = "form-label text-light" })
+                        @Html.TextAreaFor(m => m.DeliveryAddress, new { @class = "form-control bg-dark text-light border-secondary", rows = 3, placeholder = "Số nhà, tên đường, phường/xã, quận/huyện..." })
+                        @Html.ValidationMessageFor(m => m.DeliveryAddress, "", new { @class = "text-danger small" })
+                    </div>
+
+                    <div class="mb-3">
+                        @Html.LabelFor(m => m.OrderNote, new { @class = "form-label text-light" })
+                        @Html.TextAreaFor(m => m.OrderNote, new { @class = "form-control bg-dark text-light border-secondary", rows = 2, placeholder = "Ghi chú thêm cho đơn hàng (nếu có)..." })
+                        @Html.ValidationMessageFor(m => m.OrderNote, "", new { @class = "text-danger small" })
+                    </div>
+                </div>
+
+                <!-- CỘT PHẢI: TÓM TẮT GIỎ HÀNG -->
+                <div class="col-md-5">
+                    <div class="p-3 rounded" style="background-color: #111827; border: 1px solid rgba(0, 242, 254, 0.3);">
+                        <h4 class="text-info border-bottom border-secondary pb-2 mb-3" style="font-size: 18px;">📦 Đơn hàng của bạn</h4>
+
+                        @if (Model != null && Model.Cart != null && Model.Cart.Items != null && Model.Cart.Items.Any())
+                        {
+                            <ul class="list-unstyled mb-3" style="max-height: 250px; overflow-y: auto;">
+                                @foreach (var item in Model.Cart.Items)
+                                {
+                                    <li class="d-flex justify-content-between align-items-center mb-2 pb-2 border-bottom border-secondary" style="font-size: 13px;">
+                                        <span class="text-light">@item.product.ProductName <strong class="text-info">x @item.quantity</strong></span>
+                                        <span class="text-danger font-weight-bold">@string.Format("{0:N0} VNĐ", item.product.ProductPrice * item.quantity)</span>
+                                    </li>
+                                }
+                            </ul>
+
+                            <div class="d-flex justify-content-between align-items-center mb-4 pt-2">
+                                <span class="font-weight-bold text-light">Tổng tiền:</span>
+                                <h4 class="text-danger font-weight-bold mb-0" style="text-shadow: 0 0 8px rgba(244, 63, 94, 0.4);">
+                                    @string.Format("{0:N0} VNĐ", Model.Cart.TotalValue())
+                                </h4>
+                            </div>
+                        }
+                        else
+                        {
+                            <p class="text-muted small">Giỏ hàng trống.</p>
+                        }
+
+                        <button type="submit" class="btn btn-info w-100 font-weight-bold py-2 shadow-sm" style="background: linear-gradient(135deg, #00f2fe 0%, #3b82f6 100%); border: none; color: #05070e;">
+                            🚀 Hoàn tất đặt hàng
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4 pt-3 border-top border-secondary">
+                <a href="@Url.Action("Index", "Cart")" class="btn btn-outline-light btn-sm">← Quay lại giỏ hàng</a>
+            </div>
+        }
+    </div>
+</div>

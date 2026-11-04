@@ -1,0 +1,118 @@
+﻿@model _25dh110017_Mystore.Models.ViewModel.ProductSearchVM
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<head>
+    <style>
+        img {
+            height: 100px;
+            max-width: 100px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+<h2 class="bg-success" style="padding: 10px;">DANH SÁCH SẢN PHẨM</h2>
+
+<!-- Khung Tìm kiếm, Lọc giá & Sắp xếp -->
+@using (Html.BeginForm("Index", "Products1", FormMethod.Get))
+{
+    <div class="well" style="padding: 15px; margin-bottom: 20px;">
+        <div class="row">
+            <div class="col-md-3">
+                <label>Từ khóa:</label>
+                @Html.TextBox("searchTerm", Model.SearchTerm, new { @class = "form-control", @placeholder = "Tên hoặc mô tả..." })
+            </div>
+            <div class="col-md-2">
+                <label>Giá từ:</label>
+                @Html.TextBox("minPrice", Model.MinPrice, new { @class = "form-control", @type = "number", @placeholder = "VNĐ" })
+            </div>
+            <div class="col-md-2">
+                <label>Giá đến:</label>
+                @Html.TextBox("maxPrice", Model.MaxPrice, new { @class = "form-control", @type = "number", @placeholder = "VNĐ" })
+            </div>
+            <div class="col-md-5" style="margin-top: 25px;">
+                <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                <a href="@Url.Action("Index", "Products1")" class="btn btn-default">Tải lại</a>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 10px;">
+            <div class="col-md-12">
+                <span><strong>Sắp xếp: </strong></span>
+                @Html.ActionLink("Giá tăng dần", "Index", new { sortOrder = "price_asc", searchTerm = Model.SearchTerm, minPrice = Model.MinPrice, maxPrice = Model.MaxPrice }, new { @class = "btn btn-sm btn-info" })
+                @Html.ActionLink("Giá giảm dần", "Index", new { sortOrder = "price_desc", searchTerm = Model.SearchTerm, minPrice = Model.MinPrice, maxPrice = Model.MaxPrice }, new { @class = "btn btn-sm btn-info" })
+                @Html.ActionLink("Tên (A-Z)", "Index", new { sortOrder = "name_asc", searchTerm = Model.SearchTerm, minPrice = Model.MinPrice, maxPrice = Model.MaxPrice }, new { @class = "btn btn-sm btn-info" })
+                @Html.ActionLink("Tên (Z-A)", "Index", new { sortOrder = "name_desc", searchTerm = Model.SearchTerm, minPrice = Model.MinPrice, maxPrice = Model.MaxPrice }, new { @class = "btn btn-sm btn-info" })
+            </div>
+        </div>
+    </div>
+}
+
+<p style="margin-bottom: 15px;">
+    @Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-primary" })
+</p>
+
+<!-- Bảng hiển thị danh sách sản phẩm -->
+<table class="table bg-info col-md-12">
+    <tr>
+        <th class="bg-success">Hình ảnh</th>
+        <th class="bg-success">Tên sản phẩm</th>
+        <th class="bg-success">Đơn giá</th>
+        <th class="bg-success">Danh mục</th>
+        <th class="bg-success">Thao tác</th>
+    </tr>
+
+    @if (Model.Products != null && Model.Products.Count > 0)
+    {
+        foreach (var item in Model.Products)
+        {
+            <tr>
+                <td>
+                    <img src="@Url.Content(item.ProductImage ?? "~/Content/images/default_img.png")" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                </td>
+                <td>
+                    @Html.ActionLink("Sửa", "Edit", new { id = item.ProductID }, new { @class = "btn btn-primary btn-sm" })
+                    @Html.ActionLink("Chi tiết", "Details", new { id = item.ProductID }, new { @class = "btn btn-primary btn-sm" })
+                    @Html.ActionLink("Xóa", "Delete", new { id = item.ProductID }, new { @class = "btn btn-primary btn-sm" })
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td colspan="5" class="text-center text-danger">Không tìm thấy sản phẩm phù hợp!</td>
+        </tr>
+    }
+</table>
+
+<!-- THANH PHÂN TRANG -->
+<div class="text-center" style="margin-top: 20px;">
+    <ul class="pagination">
+        @for (int i = 1; i <= Model.PageCount; i++)
+        {
+            <li class="@(i == Model.PageNumber ? "active" : "")">
+                @Html.ActionLink(i.ToString(), "Index", new
+                {
+                    page = i,
+                    searchTerm = Model.SearchTerm,
+                    minPrice = Model.MinPrice,
+                    maxPrice = Model.MaxPrice,
+                    sortOrder = Model.SortOrder
+                })
+            </li>
+        }
+    </ul>
+</div>

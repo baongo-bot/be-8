@@ -1,0 +1,187 @@
+﻿/* --- NỀN TỔNG THỂ KÈM HỌA TIẾT LƯỚI CÔNG NGHỆ --- */
+body {
+    background-color: #05070e !important;
+    background-image: radial-gradient(circle at 50% 0%, rgba(0, 242, 254, 0.1) 0%, transparent 60%), linear-gradient(rgba(0, 242, 254, 0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 242, 254, 0.025) 1px, transparent 1px);
+    background-size: 100% 100%, 45px 45px, 45px 45px;
+    color: #e2e8f0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.container.body-content {
+    flex: 1;
+}
+
+/* --- HỌA TIẾT HỆ THỐNG TRANG TRÍ 2 BÊN LỀ (SẮC NÉT & RÕ RÀNG) --- */
+body::before, body::after {
+    content: '⚡ ARIS_SYSTEM\A [NODE: SECURE]\A ━━━━━━━━━━\A • STATUS: ACTIVE\A • PROTOCOL: V2.5\A • SEC_LEVEL: HIGH';
+    white-space: pre;
+    position: fixed;
+    top: 30%;
+    width: 150px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 11px;
+    color: #00f2fe;
+    opacity: 0.85; /* Tăng độ rõ nét, không bị mờ nhạt */
+    line-height: 1.8;
+    letter-spacing: 1px;
+    z-index: 5;
+    pointer-events: none;
+    text-shadow: 0 0 8px rgba(0, 242, 254, 0.8); /* Tạo hiệu ứng phát sáng neon sắc nét */
+    border: 1px solid rgba(0, 242, 254, 0.4); /* Viền khung rõ ràng hơn */
+    padding: 12px 10px;
+    background: rgba(11, 15, 25, 0.85); /* Nền tối đậm giúp chữ nổi bật hẳn lên */
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 242, 254, 0.2);
+}
+
+body::before {
+    left: 25px;
+}
+
+body::after {
+    content: '⚡ E-COMMERCE\A [DATABASE: OK]\A ━━━━━━━━━━\A • SECURE_NET\A • 25DH110017\A • FAST_LOAD';
+    right: 25px;
+}
+/* --- THANH NAVBAR CÓ VIỀN NEON PHÁT SÁNG --- */
+.navbar-dark.bg-dark {
+    background-color: #0b0f19 !important;
+    border-bottom: 2px solid #00f2fe !important;
+    box-shadow: 0 4px 30px rgba(0, 242, 254, 0.3);
+}
+
+.navbar-nav .nav-link {
+    color: #94a3b8 !important;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+    .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active {
+        color: #00f2fe !important;
+        text-shadow: 0 0 10px rgba(0, 242, 254, 0.8);
+    }
+
+/* --- KHUNG TÌM KIẾM CÓ HỌA TIẾT VIỀN SẤM SÉT --- */
+.searchProd {
+    background: linear-gradient(135deg, #111827 0%, #0b0f19 100%);
+    border: 1px solid #00f2fe;
+    border-radius: 12px;
+    padding: 30px 20px;
+    box-shadow: 0 0 25px rgba(0, 242, 254, 0.2), inset 0 0 15px rgba(0, 242, 254, 0.05);
+    position: relative;
+}
+
+    .searchProd::before {
+        content: '⚡';
+        position: absolute;
+        top: -15px;
+        left: 25px;
+        font-size: 20px;
+        background: #0b0f19;
+        padding: 0 10px;
+        color: #00f2fe;
+        text-shadow: 0 0 10px #00f2fe;
+    }
+
+    .searchProd h2 {
+        color: #00f2fe;
+        font-weight: 700;
+        text-shadow: 0 0 10px rgba(0, 242, 254, 0.5);
+    }
+
+    .searchProd input.form-control {
+        background-color: #070913;
+        border: 1px solid #1e293b;
+        color: #ffffff;
+        border-radius: 8px 0 0 8px;
+    }
+
+        .searchProd input.form-control:focus {
+            background-color: #070913;
+            color: #fff;
+            border-color: #00f2fe;
+            box-shadow: 0 0 12px rgba(0, 242, 254, 0.4);
+        }
+
+    .searchProd button.btn-primary {
+        background: linear-gradient(135deg, #00f2fe 0%, #3b82f6 100%);
+        border: none;
+        border-radius: 0 8px 8px 0;
+        font-weight: 650;
+        color: #05070e;
+        transition: all 0.3s ease;
+    }
+
+        .searchProd button.btn-primary:hover {
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.6);
+        }
+
+/* --- THẺ SẢN PHẨM (CARD) CÓ HIỆU ỨNG VIỀN SÁNG KHI DI CHUỘT --- */
+.card, .product-card {
+    background-color: #111827 !important;
+    border: 1px solid #1e293b !important;
+    border-radius: 12px !important;
+    transition: all 0.3s ease;
+}
+
+    .card:hover, .product-card:hover {
+        transform: translateY(-6px);
+        border-color: #00f2fe !important;
+        box-shadow: 0 10px 30px rgba(0, 242, 254, 0.3), inset 0 0 10px rgba(0, 242, 254, 0.15) !important;
+    }
+
+    .card-title, .card a {
+        color: #f1f5f9 !important;
+        text-decoration: none;
+    }
+
+        .card-title:hover {
+            color: #00f2fe !important;
+        }
+
+.text-danger {
+    color: #f43f5e !important;
+    font-weight: 700;
+    text-shadow: 0 0 8px rgba(244, 63, 94, 0.5);
+}
+
+/* --- THANH DANH MỤC PHÂN LOẠI SẢN PHẨM --- */
+.container .btn-outline-info, .container .btn-outline-secondary {
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    border-color: #1e293b;
+}
+
+    .container .btn-outline-secondary:hover {
+        background-color: rgba(0, 242, 254, 0.1);
+        border-color: #00f2fe;
+        color: #00f2fe !important;
+        box-shadow: 0 0 10px rgba(0, 242, 254, 0.4);
+    }
+
+    .container .btn-outline-info.active, .container .btn-outline-info:hover {
+        background: linear-gradient(135deg, #00f2fe 0%, #3b82f6 100%);
+        border: none;
+        color: #05070e !important;
+        font-weight: 650;
+        box-shadow: 0 0 15px rgba(0, 242, 254, 0.5);
+    }
+
+/* --- TIÊU ĐỀ --- */
+h2, h3, h4 {
+    color: #f8fafc;
+    letter-spacing: 0.5px;
+}
+
+/* --- FOOTER --- */
+footer {
+    color: #64748b !important;
+    border-top: 1px solid #1e293b;
+    padding-top: 20px;
+}

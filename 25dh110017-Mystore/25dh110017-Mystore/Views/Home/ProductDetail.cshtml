@@ -1,0 +1,111 @@
+﻿@model _25dh110017_Mystore.Models.Product
+
+@{
+    ViewBag.Title = Model.ProductName + " - ARIS SHOP";
+}
+
+<div class="container my-5">
+    <div class="row align-items-center">
+        <!-- CỘT TRÁI: HÌNH ẢNH SẢN PHẨM -->
+        <div class="col-md-5 mb-4 mb-md-0">
+            <div class="card border-0 shadow-lg p-3 text-center bg-dark" style="border: 1px solid rgba(0, 242, 254, 0.2) !important;">
+                <img src="@(!string.IsNullOrEmpty(Model.ProductImage) && Model.ProductImage.StartsWith("http")
+                            ? Model.ProductImage
+                            : Url.Content("~/Images/" + (Model.ProductImage ?? "default.jpg")))"
+                     alt="@Model.ProductName"
+                     class="img-fluid rounded mx-auto"
+                     style="max-height: 420px; object-fit: contain;"
+                     onerror="this.src='https://picsum.photos/seed/@Model.ProductID/400/500'" />
+            </div>
+        </div>
+
+        <!-- CỘT PHẢI: THÔNG TIN CHI TIẾT SẢN PHẨM -->
+        <div class="col-md-7">
+            <h2 class="font-weight-bold text-light mb-2">@Model.ProductName</h2>
+
+            <p class="mb-3">
+                <span class="text-muted">Danh mục:</span>
+                <span class="badge bg-info text-dark px-2 py-1">@(Model.Category != null ? Model.Category.CategoryName : "Sách")</span>
+            </p>
+
+            <!-- KHỐI GIÁ BÁN -->
+            <div class="p-3 rounded mb-4 d-flex align-items-center justify-content-between" style="background-color: #111827; border: 1px solid rgba(0, 242, 254, 0.3);">
+                <div>
+                    <span class="text-secondary small d-block">Giá niêm yết:</span>
+                    <h2 class="text-danger font-weight-bold mb-0" style="text-shadow: 0 0 8px rgba(244, 63, 94, 0.4);">
+                        @string.Format("{0:N0} VNĐ", Model.ProductPrice)
+                    </h2>
+                </div>
+                <span class="badge bg-success px-3 py-2 shadow-sm">✔ Còn hàng trong kho</span>
+            </div>
+
+            <!-- MÔ TẢ & THÔNG TIN SẢN PHẨM CHÍNH XÁC TỪ CSDL -->
+            <div class="card border-0 mb-4 shadow-sm" style="background-color: #111827; border: 1px solid #1e293b !important;">
+                <div class="card-body">
+                    <h5 class="card-title font-weight-bold border-bottom border-secondary pb-2 text-info">
+                        📖 Chi tiết & Thông tin sản phẩm
+                    </h5>
+
+                    <div class="card-text text-secondary mt-3" style="line-height: 1.8; text-align: justify; font-size: 15px; color: #94a3b8 !important;">
+                        @if (!string.IsNullOrEmpty(Model.ProductDescription))
+                        {
+                            @Model.ProductDescription
+                        }
+                        else
+                        {
+                            <p class="mb-0">Chưa có thông tin mô tả cho sản phẩm này.</p>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <!-- NÚT THAO TÁC -->
+            <div class="d-flex align-items-center gap-3 flex-wrap">
+                <a href="@Url.Action("AddToCart", "Cart", new { id = Model.ProductID })" class="btn btn-success btn-lg px-4 shadow-sm" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); border: none;">
+                    🛒 Thêm vào giỏ hàng
+                </a>
+                <a href="@Url.Action("Index", "Home")" class="btn btn-outline-light btn-lg px-4 ms-2">
+                    ← Quay lại trang chủ
+                </a>
+            </div>
+
+            <!-- KHU VỰC CAM KẾT DỊCH VỤ (LẤP ĐẦY KHOẢNG TRỐNG PHÍA DƯỚI) -->
+            <div class="row mt-4 pt-4 border-top border-secondary text-muted">
+                <div class="col-6 col-md-3 mb-3">
+                    <div class="d-flex align-items-center">
+                        <span class="fs-3 me-2">🚚</span>
+                        <div style="font-size: 12px; line-height: 1.3;">
+                            <strong class="text-light">Giao hàng nhanh</strong><br />Toàn quốc 2-4 ngày
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3 mb-3">
+                    <div class="d-flex align-items-center">
+                        <span class="fs-3 me-2">🛡️</span>
+                        <div style="font-size: 12px; line-height: 1.3;">
+                            <strong class="text-light">Bảo mật</strong><br />An toàn tuyệt đối
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3 mb-3">
+                    <div class="d-flex align-items-center">
+                        <span class="fs-3 me-2">🔄</span>
+                        <div style="font-size: 12px; line-height: 1.3;">
+                            <strong class="text-light">Đổi trả dễ dàng</strong><br />Trong vòng 7 ngày
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3 mb-3">
+                    <div class="d-flex align-items-center">
+                        <span class="fs-3 me-2">⭐</span>
+                        <div style="font-size: 12px; line-height: 1.3;">
+                            <strong class="text-light">Hỗ trợ 24/7</strong><br />Tư vấn tận tâm
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- KẾT THÚC KHU VỰC CAM KẾT -->
+
+        </div>
+    </div>
+</div>

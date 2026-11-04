@@ -1,0 +1,132 @@
+﻿@model _25dh110017_Mystore.Models.ViewModel.HomeProductVM
+@using PagedList.Mvc;
+@using PagedList;
+
+<style>
+    /* Khung chứa danh sách sản phẩm mới xếp thành các cột ngang */
+    .list-container {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 15px !important;
+        padding: 0 !important;
+        margin-top: 15px !important;
+        list-style: none !important;
+    }
+
+    /* Thẻ khung cho từng sản phẩm */
+    .lproduct-item {
+        background: #ffffff !important;
+        border: 1px solid #e0e0e0 !important;
+        border-radius: 8px !important;
+        padding: 12px !important;
+        width: calc(20% - 12px) !important; /* 5 sản phẩm / 1 hàng */
+        min-width: 180px !important;
+        box-sizing: border-box !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05) !important;
+        transition: transform 0.2s, box-shadow 0.2s !important;
+    }
+
+        .lproduct-item:hover {
+            transform: translateY(-3px) !important;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+        }
+
+        /* Định dạng hình ảnh */
+        .lproduct-item img {
+            width: 100% !important;
+            height: 160px !important;
+            object-fit: contain !important;
+            border-radius: 4px !important;
+            margin-bottom: 8px !important;
+        }
+
+    /* Định dạng tên sản phẩm */
+    .prodName {
+        font-size: 14px !important;
+        font-weight: 600 !important;
+        color: #333 !important;
+        height: 40px !important;
+        overflow: hidden !important;
+        display: -webkit-box !important;
+        -webkit-line-clamp: 2 !important;
+        -webkit-box-orient: vertical !important;
+        margin-bottom: 6px !important;
+    }
+
+    /* Giá bán */
+    .prodPrice {
+        font-size: 15px !important;
+        font-weight: bold !important;
+        color: #d0021b !important;
+        margin-bottom: 4px !important;
+    }
+
+    /* Đánh giá & đã bán */
+    .prodSale {
+        font-size: 12px !important;
+        color: #777 !important;
+        margin-bottom: 10px !important;
+    }
+
+    /* Nút Mua ngay */
+    .btn-buy {
+        display: block !important;
+        width: 100% !important;
+        padding: 6px 0 !important;
+        background-color: #eef5ff !important;
+        color: #288ad6 !important;
+        border: 1px solid #288ad6 !important;
+        border-radius: 4px !important;
+        text-align: center !important;
+        font-weight: 600 !important;
+        font-size: 13px !important;
+        text-decoration: none !important;
+    }
+
+        .btn-buy:hover {
+            background-color: #288ad6 !important;
+            color: #ffffff !important;
+        }
+</style>
+
+<!-- Hiển thị danh sách sản phẩm mới -->
+@if (Model != null && Model.NewProducts != null && Model.NewProducts.Any())
+{
+    <section class="container-fluid listProduct my-3">
+        <h3 class="mb-3 font-weight-bold">Sản phẩm mới</h3>
+        <ul class="list-container">
+            @foreach (var product in Model.NewProducts)
+            {
+                <li class="lproduct-item">
+                    <div>
+                        <a href="@Url.Action("ProductDetail", "Home", new { id = product.ProductID })">
+                            <img src="@(product.ProductImage.StartsWith("http") ? product.ProductImage : Url.Content("~/Images/" + product.ProductImage))"
+                                 alt="@product.ProductName"
+                                 onerror="this.src='https://picsum.photos/seed/@product.ProductID/200/200'" />
+                        </a>
+                        <p class="prodName">@product.ProductName</p>
+                        <p class="prodPrice">@string.Format("{0:N0}₫", product.ProductPrice)</p>
+                        <p class="prodSale">★ 5 • Đã bán @(product.OrderDetails != null ? product.OrderDetails.Count() : 0)</p>
+                    </div>
+                    <div>
+                        <a href="@Url.Action("AddToCart", "Cart", new { id = product.ProductID })" class="btn-buy">Mua ngay</a>
+                    </div>
+                </li>
+            }
+        </ul>
+    </section>
+
+    <!-- Phân trang -->
+    <div class="pagination-container text-center my-4">
+        @Html.PagedListPager(Model.NewProducts, page => Url.Action("Index", new { page, searchTerm = Model.SearchTerm }))
+    </div>
+}
+else
+{
+    <div class="container text-center my-4">
+        <p>Không tìm thấy sản phẩm nào phù hợp.</p>
+    </div>
+}
